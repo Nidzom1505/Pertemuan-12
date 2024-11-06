@@ -483,13 +483,10 @@ public class MataKulia extends javax.swing.JFrame {
 
     public void showTable() {
         EntityManager em = Persistence.createEntityManagerFactory("PBOPU").createEntityManager();
-        em.getTransaction().begin();
 
-        TypedQuery<Matakuliah> all = em.createNamedQuery("Matakuliah.findAll", Matakuliah.class);
-        Query q = em.createQuery("SELECT m FROM Matakuliah m");
+        Query q = em.createNamedQuery("Matakuliah.findAll");
         List<Matakuliah> hasil = q.getResultList();
-        em.getTransaction().commit();
-        em.close();
+
         tbmk = new DefaultTableModel(new String[]{"KODE MataKuliah", "NAMA MataKuliah", "SKS", "SEMESTER"}, 0);
         for (Matakuliah data : hasil) {
             Object[] baris = new Object[5];
